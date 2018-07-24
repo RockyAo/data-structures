@@ -15,6 +15,14 @@ public struct Stack<Element> {
     public mutating func pop() -> Element? {
         return storage.popLast()
     }
+    
+    public func peek() -> Element? {
+        return storage.last
+    }
+    
+    public var isEmpty: Bool {
+        return peek() == nil
+    }
 }
 
 extension Stack: CustomStringConvertible {
