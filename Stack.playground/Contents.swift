@@ -5,7 +5,12 @@ import Foundation
 
 public struct Stack<Element> {
     private var storage: [Element] = []
-    public init() {}
+    
+    public init() { }
+    
+    public init(_ elements: [Element]) {
+        storage = elements
+    }
     
     public mutating func push(_ element: Element) {
         storage.append(element)
@@ -22,6 +27,12 @@ public struct Stack<Element> {
     
     public var isEmpty: Bool {
         return peek() == nil
+    }
+}
+
+extension Stack: ExpressibleByArrayLiteral {
+    public init(arrayLiteral elements: Element...) {
+        storage = elements
     }
 }
 
@@ -54,3 +65,18 @@ example(of: "using a stack") {
         print("Popped: \(poppedElement)")
     }
 }
+
+example(of: "initializing a stack from an array") {
+    let array = ["A", "B", "C", "D"]
+    var stack = Stack(array)
+    print(stack)
+    stack.pop()
+}
+
+example(of: "initializing a stack from an array literal") {
+    var stack: Stack = [1.0, 2.0, 3.0, 4.0]
+    print(stack)
+    stack.pop()
+}
+
+
